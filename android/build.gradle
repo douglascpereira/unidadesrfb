@@ -10,6 +10,17 @@ buildscript {
 }
 
 allprojects {
+    ext {
+        supportLibraryVersion = '28.0.0'
+        playServicesVersion = '17.0.0'
+
+        appBuildToolsVersion = '29.0.3'
+        appCompileSdkVersion = 29
+        appMinSdkVersion = 16
+        appTargetSdkVersion = 29
+        appWithContentProvider = 'false'
+    }
+
     repositories {
         google()
         jcenter()

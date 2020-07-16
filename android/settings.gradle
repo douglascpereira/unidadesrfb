@@ -3,6 +3,7 @@
 // found in the LICENSE file.
 
 include ':app', ':rfb', ':unidadesrfb'
+include ':swipetodismissundolist'
 include ':searchview'
 
 def localPropertiesFile = new File(rootProject.projectDir, "local.properties")

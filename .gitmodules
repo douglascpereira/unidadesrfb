@@ -7,3 +7,6 @@
 [submodule "android/searchview"]
 	path = android/searchview
 	url = https://git.serpro/android-library/searchview.git
+[submodule "android/swipetodismissundolist"]
+	path = android/swipetodismissundolist
+	url = https://git.serpro/android-library/swipetodismissundolist.git
