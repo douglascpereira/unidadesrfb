@@ -1,0 +1,104 @@
+def localProperties = new Properties()
+def localPropertiesFile = rootProject.file('local.properties')
+if (localPropertiesFile.exists()) {
+    localPropertiesFile.withReader('UTF-8') { reader ->
+        localProperties.load(reader)
+    }
+}
+
+def flutterRoot = localProperties.getProperty('flutter.sdk')
+if (flutterRoot == null) {
+    throw new GradleException("Flutter SDK not found. Define location with flutter.sdk in the local.properties file.")
+}
+
+def flutterVersionCode = localProperties.getProperty('flutter.versionCode')
+if (flutterVersionCode == null) {
+    flutterVersionCode = '1'
+}
+
+def flutterVersionName = localProperties.getProperty('flutter.versionName')
+if (flutterVersionName == null) {
+    flutterVersionName = '1.0'
+}
+
+apply plugin: 'com.android.application'
+apply from: "$flutterRoot/packages/flutter_tools/gradle/flutter.gradle"
+
+android {
+    compileSdkVersion 28
+    flavorDimensions "default"
+
+    lintOptions {
+        disable 'InvalidPackage'
+    }
+
+    defaultConfig {
+        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
+        applicationId "com.example.unidadesrfb"
+        minSdkVersion 16
+        targetSdkVersion 28
+        versionCode flutterVersionCode.toInteger()
+        versionName flutterVersionName
+        multiDexEnabled true
+    }
+
+    buildTypes {
+        release {
+            // TODO: Add your own signing config for the release build.
+            // Signing with the debug keys for now, so `flutter run --release` works.
+            signingConfig signingConfigs.debug
+        }
+    }
+    productFlavors {
+        dev {
+            applicationId "com.example.unidadesrfb" + ".dev"
+            versionName flutterVersionName + "-DEV"
+
+            buildConfigField('boolean', 'USE_CRASHLYTICS', 'false')
+
+            buildConfigField('String', 'SERVICOS_RFB_URL', "\"http://10.32.113.67\"")
+            buildConfigField('String', 'SERVICOS_RFB_PATH', "\"/servicos-rfb-pessoa-fisica/v2/\"")
+            buildConfigField('int', 'SERVICOS_RFB_PORTA', '28080')
+
+            buildConfigField('String', 'SERVICOS_IRPFONLINE_URL', "\"https://teste.irpfonline.estaleiro.serpro.gov.br/\"")
+
+            ext.enableCrashlytics = false
+        }
+        hom {
+            applicationId "com.example.unidadesrfb" + ".hom"
+            versionName flutterVersionName + "-" + flutterVersionCode.toInteger()
+
+            buildConfigField('boolean', 'USE_CRASHLYTICS', 'true')
+
+            buildConfigField('String', 'SERVICOS_RFB_URL', "\"https://movel02.hom.receita.fazenda.gov.br\"")
+            buildConfigField('String', 'SERVICOS_RFB_PATH', "\"/servicos-rfb/v2/\"")
+            buildConfigField('int', 'SERVICOS_RFB_PORTA', '443')
+
+            buildConfigField('String', 'SERVICOS_IRPFONLINE_URL', "\"https://hom.irpfonline.estaleiro.serpro.gov.br/\"")
+
+            resValue "string", "versao_app_top_bar", "v" + flutterVersionName + "." + flutterVersionCode.toInteger()
+        }
+        pro {
+            buildConfigField('boolean', 'USE_CRASHLYTICS', 'true')
+
+            buildConfigField('String', 'SERVICOS_RFB_URL', "\"https://movel02.receita.fazenda.gov.br\"")
+            buildConfigField('String', 'SERVICOS_RFB_PATH', "\"/servicos-rfb/v2/\"")
+            buildConfigField('int', 'SERVICOS_RFB_PORTA', '443')
+
+            buildConfigField('String', 'SERVICOS_IRPFONLINE_URL', "\"https://www39.receita.fazenda.gov.br/\"")
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+
+dependencies {
+    implementation project(':unidadesrfb')
+}
+
+flutter {
+    source '../..'
+}
