@@ -1,12 +1,12 @@
 [submodule "android/unidadesrfb"]
 	path = android/unidadesrfb
-	url = https://git.serpro/android/unidadesrfb.git
+	url = https://gitcorporativo.serpro/apprfb-11445/android/unidadesrfb.git
 [submodule "android/rfb"]
 	path = android/rfb
-	url = https://git.serpro/android/rfb.git
+	url = https://gitcorporativo.serpro/apprfb-11445/android/rfb
 [submodule "android/searchview"]
 	path = android/searchview
-	url = https://git.serpro/android-library/searchview.git
+	url = https://gitcorporativo.serpro/apprfb-11445/android/searchview.git
 [submodule "android/swipetodismissundolist"]
 	path = android/swipetodismissundolist
-	url = https://git.serpro/android-library/swipetodismissundolist.git
+	url = https://gitcorporativo.serpro/apprfb-11445/android/swipetodismissundolist.git
